@@ -23,15 +23,24 @@ class Program
         print("  DOS-win_10 Console      ");
         print("  Console Control System  ");
         print();
+        pr_cl("  To get really fullscreen, press F11  ");
         print();
-        pr_cl("execute> ", end:"");
+        print();
         pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end:"");
-        bool a = handler.Handle(Console.ReadLine());
+        bool a = true;
         while(a)
         {
             pr_cl("\nexecute> ", end: "");
             pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end: "");
-            a = handler.Handle(Console.ReadLine());
+            string inp = Console.ReadLine();
+            if (inp == "tfs")
+            {
+                ConsoleFullScreen.ToggleFullScreen();
+            }
+            else
+            { 
+                a = handler.Handle(inp);
+            }
         }
     }
 
@@ -42,7 +51,7 @@ class Program
         Program program = new Program();
         settings = new Settings();
 
-        ConsoleFullScreen.GoFullScreen();
+        if (Settings.settings["fullscreen"] == "true") { ConsoleFullScreen.GoFullScreen(); }
         program.Loop();
 
         Console.ForegroundColor = ConsoleColor.White;

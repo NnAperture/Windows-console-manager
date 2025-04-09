@@ -3,12 +3,14 @@ using System.Security.Principal;
 using static Filer;
 using static Help;
 using static FileSystem;
+using static Settings;
 using static Program;
 using System.Diagnostics;
 class Handler
 {
     Help help = new Help();
     FileSystem fs = new FileSystem();
+    Settings settings = new Settings();
 
     public bool Handle(string input)
     {
@@ -33,12 +35,13 @@ class Handler
     {
         help.Check(comand);
         fs.Check(comand, args);
+        settings.Check(comand, args);
 
         if (comand == "exit")
         {
             return (exit_com(comand, args));
         }
-        if (comand == "shutdown")
+        if (comand == "shutdown" & Settings.settings["shutdown_comand"] == "true")
         {
             shut_com(comand, args);
         }
@@ -47,7 +50,7 @@ class Handler
 
     bool exit_com(string comand, string[] args)
     {
-        if(args.Contains("-nc") | args.Contains("-noconfirm"))
+        if(args.Contains("-nc") | args.Contains("-noconfirm") | Settings.settings["exit_noconfirm"] == "true")
         {
             return false;
         }
@@ -99,7 +102,7 @@ class Handler
 
     void shut_com(string comand, string[] args)
     {
-        if (args.Contains("-nc") | args.Contains("-noconfirm"))
+        if (args.Contains("-nc") | args.Contains("-noconfirm") | Settings.settings["shutdown_noconfirm"] == "true")
         {
             Process.Start("shutdown", "/s /t 0");
         }

@@ -34,19 +34,26 @@ class Help
         print("  |  > settings menu.    Optional args: -nc: noconsole mode ();");
         print("  |    -line: next argument needs to be number / name of setting you want to select at first.");
         print("  |    -ch: next argument needs to be pair of settings_name=new_value");
-        str += 4; if (ch_pg(6)) { return; }
+        str += 4; if (ch_pg(7)) { return; }
         print("  |");
-        print("  |-buffer <name> [ -add \"comand\" -remove \"comand\" -pop -execute -fullremove -print -fprint -nc -num \"comand\" ]");
+        print("  |-buffer <name> [ -add \"comand\" -remove \"comand\" -pop <num> -execute -fullremove -print -list -nc -num \"comand\" ]");
         print("  |  > batch buffer. First argument - name of buffer");
-        print("  |    -nc: no print; -print: print all comands from this buffer; -fprint:print all buffers;");
-        print("  |    -add: add new comand;  -num: print number by full comand;  -execute: execute buffer's comands in console (batch)");
+        print("  |    -nc: no print; -print: print all comands from this buffer; -list:print all buffers;");
+        print("  |    -add: add new comand;  -num: print number by full comand (Insertes result to BUFNUM variable);  -execute: execute buffer's comands in console (batch)");
         print("  |    -remove: removes a string by full string;  -pop: removes a string by number; -fullremove: delete this buffer");
-        str += 6; if (ch_pg(5)) { return; }
+        print("  |    -fullremove: remove full buffer;");
+        str += 7; if (ch_pg(2)) { return; }
+        print("  |-end");
+        print("  |  > (ONLY FOR BUFFERS) end execution");
+        str += 2; if (ch_pg(2)) { return; }
+        print("  |-execute <name>");
+        print("  |  > (ONLY FOR BUFFERS) better execution");
+        str += 2; if (ch_pg(5)) { return; }
         print("  |-var <name> [ -nc -list -remove_all -remove += -= *= /= \"expression\" -buf_len -lis_len -str_len <name> ]");
         print("  |  > variables manager. -list: print list of all variables (<name> can be empty) -remove_all: remove all variables (<name> can be empty)");
         print("  |    -remove: remove this variable; += -= *= /= //= %= works with NUMBER; += *= '*= works with STRINGS ('*= - multiply STRING to NUMBER); !!! If variable is not defined, it uses '0' or ''.");
         print("  |    -buf_len -lis_len -str_len - takes as next argument name of object. Sets variable as length of object");
-        print("  |    To use variable, in comand write [name] (this constuction will be raplaced by value); If you want to write ] or [ (in str), write \\], \\[");
+        print("  |    To use variable, in comand write [name] (this constuction will be raplaced by value); If you want to write ] or [ (in str), write \\[");
         str += 5; if (ch_pg(3)) { return; }
         print("  |");
         print("  |-fs");

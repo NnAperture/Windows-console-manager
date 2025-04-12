@@ -12,7 +12,8 @@ class Handler
     Help help = new Help();
     FileSystem fs = new FileSystem();
     Settings settings = new Settings();
-    Variabler variables = new Variabler();
+    Variabler variable = new Variabler();
+    Buffer buffer = new Buffer();
 
     public bool Handle(string input)
     {
@@ -109,7 +110,8 @@ class Handler
         help.Check(comand);
         fs.Check(comand, args);
         settings.Check(comand, args);
-        variables.Check(comand, args);
+        variable.Check(comand, args);
+        buffer.Check(comand, args);
 
         if (comand == "exit")
         {

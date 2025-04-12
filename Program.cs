@@ -24,13 +24,15 @@ class Program
         print("  Console Control System  ");
         print();
         pr_cl("  To get really fullscreen, press F11  ");
+        print("  Type 'help'");
+        print();
         print();
         print();
         pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end:"");
         bool a = true;
         while(a)
         {
-            pr_cl("\nexecute> ", end: "");
+            pr_cl("\n execute> ", end: "");
             pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end: "");
             string inp = Console.ReadLine();
             if (inp == "tfs")

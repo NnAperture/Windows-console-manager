@@ -37,6 +37,9 @@ public class Settings
         ["shutdown_comand"] = "true",
         ["fullscreen"] = "true",
         [""] = "",
+        ["variable_max"] = "-1",
+        ["buffer_max"] = "-1",
+        ["buffer_maxsize"] = "-1",
     };
 
     Dictionary<string, string> description = new Dictionary<string, string>()
@@ -47,15 +50,38 @@ public class Settings
         ["shutdown_comand"] = "allow User to use shutdown comand",
         ["fullscreen"] = "activate fullscreen when starting console",
         [""] = "Just a string to separate settings (does nothing)",
+        ["variable_max"] = "Max number of variables can be stored (-1 to deactivate limit)",
+        ["buffer_max"] = "Max number of buffers can be stored (-1 to deactivate limit)",
+        ["buffer_maxsize"] = "Max number of comands in one buffer can be stored (-1 to deactivate limit)",
     };
 
     void Loop(string[] args)
     {
+        Console.Clear();
         int line = 0;
         {
+            bool nc = false;
             string last = "";
             foreach (string arg in args)
             {
+                if(arg == "-nc") { nc = true; }
+                if(last == "-ch")
+                {
+                    string[] sp = arg.Split("=");
+                    if(sp.Length == 2)
+                    {
+                        string key = sp[0];
+                        string value = sp[1];
+                        if (settings.ContainsKey(key))
+                        {
+                            settings[key] = value;
+                        }
+                        else
+                        {
+                            pr_cl("ARGUMENT -ch: no setting with this name");
+                        }
+                    }
+                }
                 if(last == "-line")
                 {
                     try
@@ -73,16 +99,21 @@ public class Settings
                                 }line++;
                             }
                         }
+                        else
+                        {
+                            pr_cl("AGUMENT -line: Can't recognize string.");
+                        }
                     }
                 }
                 last = arg;
             }
+            if (nc) { return; }
             if (line >= settings.Count)
             {
                 line = 0;
             }
         }
-        Render(line);
+        Render(line, false);
         while (true)
         {
             ConsoleKeyInfo key = Console.ReadKey();
@@ -151,9 +182,9 @@ public class Settings
         Save();
     }
 
-    void Render(int line_num)
+    void Render(int line_num, bool cl=true)
     {
-        Console.Clear();
+        if (cl) { Console.Clear(); }
         print("    __________________ ");
         pr_cl("   |     SETTINGS     |");
         print("   |To exit, press Esc|");
@@ -163,11 +194,11 @@ public class Settings
         int end = settings.Count;
         try
         {
-            if (Int32.Parse(settings["strings"]) < settings.Count + 1)
+            if (Int32.Parse(settings["strings"]) < settings.Count + 5)
             {
-                int b = Int32.Parse(settings["strings"]) / 2;
+                int b = (Int32.Parse(settings["strings"]) - 6) / 2;
                 end = line_num + b;
-                start = end - Int32.Parse(settings["strings"]) + 2;
+                start = end - Int32.Parse(settings["strings"]) + 6;
                 if (start < 0)
                 {
                     end -= start;

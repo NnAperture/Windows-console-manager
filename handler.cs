@@ -6,28 +6,101 @@ using static FileSystem;
 using static Settings;
 using static Program;
 using System.Diagnostics;
+using System.ComponentModel.Design;
 class Handler
 {
     Help help = new Help();
     FileSystem fs = new FileSystem();
     Settings settings = new Settings();
+    Variabler variables = new Variabler();
 
     public bool Handle(string input)
     {
-        string[] sp = input.Split();
-        if (sp.Length == 0)
+        List<string> sp = new List<string>();
+
+        bool str = false;
+        string word = "";
+        char last = ' ';
+        bool var = false;
+        string vir = "";
+        bool changed = false;
+        foreach(char ch in input)
+        {
+            if (var)
+            {
+                vir += ch;
+                if (last == '\\' & ch == '\\') { vir = vir.Substring(0, vir.Length - 1); last = ' '; }
+                if (ch == ']')
+                {
+                    if(last == '\\')
+                    {
+                        vir = vir.Substring(0, vir.Length + 2) + ']';
+                    }
+                    else
+                    {
+                        if(Variabler.variables.ContainsKey(vir.Substring(1, vir.Length - 2)))
+                        {
+                            word += Variabler.variables[vir.Substring(1, vir.Length - 2)];
+                            vir = "";
+                            changed = true;
+                        }
+                        else
+                        {
+                            word += var;
+                        }
+                        var = false;
+                    }
+                }
+            }
+            else
+            {
+                if ((!str) & ch == ' ' & word != "")
+                {
+                    sp.Add(word);
+                    word = "";
+                }
+                else
+                {
+                    word += ch;
+                }
+                if (ch == '"' & last != '\\')
+                {
+                    str = !str;
+                }
+                if (ch == '"' & last == '\\')
+                {
+                    word = word.Substring(0, word.Length - 2) + '"';
+                }
+                if (last == '\\' & ch == '\\')
+                {
+                    last = ' ';
+                    word = word.Substring(0, word.Length - 1);
+                }
+                if (last != '\\' & ch == '[')
+                {
+                    var = true;
+                    vir = "[";
+                    word = word.Substring(0, word.Length - 1);
+                }
+            }
+            last = ch;
+        }
+        if(word != "") { sp.Add(word + vir); }
+        if (changed) { print("Some variables inserted to your comand: " + string.Join(" ", sp)); }
+
+        if (sp.Count == 0)
         {
             return (true);
         }
         else
         {
-            if(sp.Length == 1)
+            if(sp.Count == 1)
             {
                 return Executer(sp[0], new string[0]);
             }
             else
             {
-                return Executer(sp[0], sp[1..]);
+                return Executer(sp[0], sp[1..].ToArray());
             }
         }
     }
@@ -36,6 +109,7 @@ class Handler
         help.Check(comand);
         fs.Check(comand, args);
         settings.Check(comand, args);
+        variables.Check(comand, args);
 
         if (comand == "exit")
         {

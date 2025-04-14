@@ -39,8 +39,9 @@ public class Buffer
         }
     }
 
-    void Execute(string name)
+    public static void Execute(string name)
     {
+        Conditional conditional = new Conditional();
         if (buffers.ContainsKey(name))
         {
             Handler handler = new Handler();
@@ -79,8 +80,20 @@ public class Buffer
                     }
                     else
                     {
-                        a = handler.Handle(inp);
-                        if (!a) { Environment.Exit(12); }
+                        string[] b = conditional.BCheck(inp.Trim('"'));
+                        if (b.Length == 0)
+                        {
+                            a = handler.Handle(inp);
+                            if (!a) { Environment.Exit(12); }
+                        }
+                        else
+                        {
+                            que.RemoveAt(0);
+                            List<string> n = new List<string>() { "" };
+                            n.AddRange(b);
+                            n.AddRange(que);
+                            que = n;
+                        }
                     }
                 }
                 que.RemoveAt(0);
@@ -159,6 +172,7 @@ public class Buffer
 
     void Num(string name, string arg)
     {
+        Variabler variabler = new Variabler();
         if (buffers.ContainsKey(name))
         {
             bool a = true;

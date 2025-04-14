@@ -3,7 +3,6 @@
 public class Variabler
 {
     public static Dictionary<string, string> variables = new Dictionary<string, string>();
-    public Variabler() { RemoveAll(true); }
     public void Check(string comand, string[] args)
     {
         if(comand == "var")
@@ -333,7 +332,7 @@ public class Variabler
         if (!nc) { print("All variables deleted."); }
     }
 
-    void List()
+    public static void List()
     {
         pr_cl("Variables:", fg:ConsoleColor.Cyan);
         print();

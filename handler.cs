@@ -12,13 +12,14 @@ class Handler
     Help help = new Help();
     FileSystem fs = new FileSystem();
     Settings settings = new Settings();
-    Variabler variable = new Variabler();
+    public Variabler variabler = new Variabler();
     Buffer buffer = new Buffer();
+    Conditional conditional = new Conditional();
+
 
     public bool Handle(string input)
     {
         List<string> sp = new List<string>();
-
         bool str = false;
         string word = "";
         char last = ' ';
@@ -47,7 +48,8 @@ class Handler
                         }
                         else
                         {
-                            word += var;
+                            word += vir;
+                            vir = "";
                         }
                         var = false;
                     }
@@ -71,6 +73,7 @@ class Handler
                 if (ch == '"' & last == '\\')
                 {
                     word = word.Substring(0, word.Length - 2) + '"';
+                    last = ' ';
                 }
                 if (last == '\\' & ch == '\\')
                 {
@@ -110,8 +113,9 @@ class Handler
         help.Check(comand);
         fs.Check(comand, args);
         settings.Check(comand, args);
-        variable.Check(comand, args);
+        variabler.Check(comand, args);
         buffer.Check(comand, args);
+        conditional.Check(comand, args);
 
         if (comand == "exit")
         {

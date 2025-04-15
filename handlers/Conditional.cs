@@ -90,7 +90,6 @@ public class Conditional
             last = ch;
         }
         if (word != "") { sp.Add(word + vir); }
-        if (changed) { print("Some variables inserted to your comand: " + string.Join(" ", sp)); }
 
         if (sp[0] == "if") { return If(sp.ToArray()[1..]); }
         return new string[0];
@@ -159,7 +158,6 @@ public class Conditional
 
     bool Expr(string a)
     {
-        print(a);
         char[] operators = new char[] { '&', '|' };
         List<string> micros = new List<string>();
         List<string> sign = new List<string>();
@@ -211,7 +209,6 @@ public class Conditional
             if (sign[i] == "|") { current |= Prime(micros[i + 1]); }
             if (sign[i] == "&") { current &= Prime(micros[i + 1]); }
         }
-        print(current.ToString());
         return current;
     }
 

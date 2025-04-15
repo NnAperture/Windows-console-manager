@@ -52,14 +52,17 @@ class Help
         print("  |-if \"expression\" <name> -else name");
         print("  |  > expression: NO variables (\"2 < 4 & (3 == 3 | (!5 >= 1))\"). To use variables, \"[name] > 2\"");
         print("  |    name - buffer name.");
-        str += 2; if (ch_pg(5)) { return; }
+        str += 2; if (ch_pg(6)) { return; }
         print("  |-var <name> [ -nc -list -remove_all -remove += -= *= /= \"expression\" -buf_len -lis_len -str_len <name> ]");
         print("  |  > variables manager. -list: print list of all variables (<name> can be empty) -remove_all: remove all variables (<name> can be empty)");
         print("  |    -remove: remove this variable; += -= *= /= //= %= works with NUMBER; += *= '*= works with STRINGS ('*= - multiply STRING to NUMBER);");
         print("  |     !!! If variable is not defined, it uses '0' or ''.");
         print("  |    -buf_len -lis_len -str_len - takes as next argument name of object. Sets variable as length of object");
         print("  |    To use variable, in comand write [name] (this constuction will be raplaced by value); If you want to write ] or [ (in str), write \\[");
-        str += 5; if (ch_pg(3)) { return; }
+        str += 6; if (ch_pg(2)) { return; }
+        print("  |-env");
+        print("  |  > prints enviroment file. TUTOR: write output to file with name 'test.ssue', double-click it and select SSU as program to open this file extension.");
+        str += 2; if (ch_pg(3)) { return; }
         print("  |");
         print("  |-fs");
         print("  |  > enter FileSystem mode.");

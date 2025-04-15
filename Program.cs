@@ -31,7 +31,7 @@ class Program
         pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end:"");
         if (args.Length != 0)
         {
-            pr_cl("\n execute> ", end: "");
+            pr_cl(" execute> ", end: "");
             pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end: "");
             Enviroment_saver saver = new Enviroment_saver();
             saver.Argument(args);
@@ -39,7 +39,7 @@ class Program
         bool a = true;
         while(a)
         {
-            pr_cl("\n execute> ", end: "");
+            pr_cl(" execute> ", end: "");
             pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end: "");
             string inp = Console.ReadLine();
             if (inp == "tfs")

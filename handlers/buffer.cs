@@ -17,13 +17,12 @@ public class Buffer
     void Separator(string[] args)
     {
         pr_cl(end: "", fg: ConsoleColor.Blue);
-        bool nc = false;
+        bool nc = args.Contains("-nc");
         string last = "";
         string name = "";
         foreach (string arg in args)
         {
             if (last == "") { name = arg; }
-            if (arg == "-nc") { nc = !nc; }
             if(arg == "-list") { List(); }
             if(arg == "-print") { Print(name); }
             if (arg == "-fullremove") { FullRemove(name, nc); }
@@ -32,27 +31,27 @@ public class Buffer
             if (last == "-remove") { Remove(name, arg, nc); }
             if (last == "-pop") { Pop(name, arg, nc); }
 
-            if(arg == "-execute") { Execute(name); }
+            if(arg == "-execute") { Execute(name, nc); }
 
 
             last = arg;
         }
     }
 
-    public static void Execute(string name)
+    public static void Execute(string name, bool nc=true)
     {
         Conditional conditional = new Conditional();
         if (buffers.ContainsKey(name))
         {
             Handler handler = new Handler();
             bool a = true;
-            print("Buffer " + name);
+            if (!nc) { print("Buffer " + name); }
             pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end: "");
             List<string> que = buffers[name].ToList();
             while (que.Count != 0)
             {
                 string inp = que[0];
-                pr_cl("\n execute> ", end: "");
+                pr_cl(" execute> ", end: "");
                 pr_cl(inp, fg: ConsoleColor.Green, bg: ConsoleColor.Black);
                 if (inp == "end") { return; }
 

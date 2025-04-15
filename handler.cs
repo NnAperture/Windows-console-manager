@@ -15,6 +15,7 @@ class Handler
     public Variabler variabler = new Variabler();
     Buffer buffer = new Buffer();
     Conditional conditional = new Conditional();
+    Enviroment_saver ssue = new Enviroment_saver();
 
 
     public bool Handle(string input)
@@ -90,7 +91,7 @@ class Handler
             last = ch;
         }
         if(word != "") { sp.Add(word + vir); }
-        if (changed) { print("Some variables inserted to your comand: " + string.Join(" ", sp)); }
+        if (changed) { print(string.Join(" ", sp)); }
 
         if (sp.Count == 0)
         {
@@ -116,6 +117,7 @@ class Handler
         variabler.Check(comand, args);
         buffer.Check(comand, args);
         conditional.Check(comand, args);
+        ssue.Check(comand, args);
 
         if (comand == "exit")
         {

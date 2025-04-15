@@ -14,13 +14,12 @@ public class Variabler
     void Separator(string[] args)
     {
         pr_cl(end: "", fg: ConsoleColor.Red);
-        bool nc = false;
+        bool nc = args.Contains("-nc");
         string last = "";
         string name = "";
         foreach(string arg in args)
         {
             if(last == "") { name = arg; }
-            if(arg == "-nc") { nc = true; }
             if(arg == "-list") { List(); }
             if(arg == "-remove_all") { RemoveAll(nc); }
             if(arg == "-remove") { Remove(name, nc); }

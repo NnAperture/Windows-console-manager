@@ -247,7 +247,7 @@ public class Settings
         pr_cl(fg:ConsoleColor.Black);
     }
 
-    public void Save()
+    public static void Save()
     {
         Filer file = new Filer("settings.conf");
         file.Clear();

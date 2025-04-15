@@ -123,7 +123,7 @@ public class Filer
             str += cur;
             cur = Read(1);
         }
-        return str + cur;
+        return str;
     }
     public IEnumerator<string> GetEnumerator()
     {

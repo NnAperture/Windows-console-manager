@@ -57,7 +57,6 @@ public class Settings
 
     void Loop(string[] args)
     {
-        Console.Clear();
         int line = 0;
         {
             bool nc = false;
@@ -112,6 +111,7 @@ public class Settings
             {
                 line = 0;
             }
+            if(!nc) { Console.Clear(); }
         }
         Render(line, false);
         while (true)

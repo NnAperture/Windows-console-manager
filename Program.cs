@@ -14,7 +14,7 @@ class Program
         Console.Write(text + end);
     }
 
-    public void Loop()
+    public void Loop(string[] args)
     {
         Handler handler = new Handler();
         print();
@@ -29,6 +29,13 @@ class Program
         print();
         print();
         pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end:"");
+        if (args.Length != 0)
+        {
+            pr_cl("\n execute> ", end: "");
+            pr_cl(fg: ConsoleColor.Green, bg: ConsoleColor.Black, end: "");
+            Enviroment_saver saver = new Enviroment_saver();
+            saver.Argument(args);
+        }
         bool a = true;
         while(a)
         {
@@ -46,15 +53,20 @@ class Program
         }
     }
 
-    public static void Main()
+    public static void Main(string[] args)
     {
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
         Program program = new Program();
-        settings = new Settings();
+        {
+            settings = new Settings();
 
-        if (Settings.settings["fullscreen"] == "true") { ConsoleFullScreen.GoFullScreen(); }
-        program.Loop();
+            if (Settings.settings["fullscreen"] == "true") { ConsoleFullScreen.GoFullScreen(); }
+        }
+
+        program.Loop(args);
 
         Console.ForegroundColor = ConsoleColor.White;
         Console.BackgroundColor = ConsoleColor.Black;

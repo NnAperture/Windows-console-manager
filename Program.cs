@@ -7,11 +7,21 @@ class Program
     {
         Console.Write(text + end);
     }
+    public static void print(int num, string end = "\n")
+    {
+        Console.Write(num.ToString() + end);
+    }
     public static void pr_cl(string text = "", ConsoleColor fg = ConsoleColor.White, ConsoleColor bg = ConsoleColor.Black, string end = "\n")
     {
         Console.ForegroundColor = fg;
         Console.BackgroundColor = bg;
         Console.Write(text + end);
+    }
+    public static void pr_cl(int num, ConsoleColor fg = ConsoleColor.White, ConsoleColor bg = ConsoleColor.Black, string end = "\n")
+    {
+        Console.ForegroundColor = fg;
+        Console.BackgroundColor = bg;
+        Console.Write(num.ToString() + end);
     }
 
     public void Loop(string[] args)
@@ -23,7 +33,7 @@ class Program
         print("  DOS-win_10 Console      ");
         print("  Console Control System  ");
         print();
-        pr_cl("  To get really fullscreen, press F11  ");
+        pr_cl("  To get real fullscreen, press F11  ");
         print("  Type 'help'");
         print();
         print();

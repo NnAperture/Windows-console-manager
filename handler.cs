@@ -16,7 +16,7 @@ class Handler
     Buffer buffer = new Buffer();
     Conditional conditional = new Conditional();
     Enviroment_saver ssue = new Enviroment_saver();
-
+    KeyCombination keyCombination = new KeyCombination();
 
     public bool Handle(string input)
     {
@@ -118,6 +118,7 @@ class Handler
         buffer.Check(comand, args);
         conditional.Check(comand, args);
         ssue.Check(comand, args);
+        keyCombination.Check(comand, args);
 
         if (comand == "exit")
         {

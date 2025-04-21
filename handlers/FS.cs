@@ -8,6 +8,20 @@ class FileSystem
         if(comand == "fs")
         {
             Console.Clear();
+            Separate(args);
+        }
+    }
+
+    void Separate(string[] args)
+    {
+        bool nc = args.Contains("-nc");
+        string last = "";
+        foreach(string arg in args)
+        {
+
+        }
+
+        if (!nc) {
             loop();
         }
     }
@@ -16,11 +30,8 @@ class FileSystem
     int page = 1;
     void loop()
     {
-        
-    }
-
-    void NormalRender()
-    {
-
+        FS_main fs = new FS_main();
+        fs.loop();
+        fs.Save();
     }
 }

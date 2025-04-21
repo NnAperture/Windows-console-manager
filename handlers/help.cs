@@ -20,9 +20,12 @@ class Help
         print("  | ");
         print("  |-help");
         print("  |  > prints comand list.");
-        str += 5; if(ch_pg(2)){ return; }
+        str += 5; if (ch_pg(2)) { return; }
         print("  |-tfs");
         print("  |  > toggles full screen.");
+        str += 2; if (ch_pg(2)) { return; }
+        print("  |-keycomb");
+        print("  |  > Prints pressed key combinations. Esc to exit.");
         str += 2; if (ch_pg(2)) { return; }
         print("  |-exit [ -nc -noconfirm ]");
         print("  |  > exit the DOS-win_10.    Optional args: -nc, -noconfirm - exit without confirm.");

@@ -2,7 +2,10 @@
 
 public class Variabler
 {
-    public static Dictionary<string, string> variables = new Dictionary<string, string>();
+    public static Dictionary<string, string> variables = new Dictionary<string, string>()
+    {
+        ["COMPRINT"] = "true"
+    };
     public void Check(string comand, string[] args)
     {
         if(comand == "var")

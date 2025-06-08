@@ -40,6 +40,7 @@ public class Settings
         ["variable_max"] = "-1",
         ["buffer_max"] = "-1",
         ["buffer_maxsize"] = "-1",
+        ["comand_print"] = "normal",
     };
 
     Dictionary<string, string> description = new Dictionary<string, string>()
@@ -53,6 +54,7 @@ public class Settings
         ["variable_max"] = "Max number of variables can be stored (-1 to deactivate limit)",
         ["buffer_max"] = "Max number of buffers can be stored (-1 to deactivate limit)",
         ["buffer_maxsize"] = "Max number of comands in one buffer can be stored (-1 to deactivate limit)",
+        ["comand_print"] = "What is output during buffer execution: normal - all commands, name - buffer name, null - nothing",
     };
 
     void Loop(string[] args)

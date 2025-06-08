@@ -43,6 +43,10 @@ public class Buffer
         Conditional conditional = new Conditional();
         if (buffers.ContainsKey(name))
         {
+            if (Settings.settings["comand_print"] == "name")
+            {
+                pr_cl(name, fg: ConsoleColor.Green, bg: ConsoleColor.Black);
+            }
             Handler handler = new Handler();
             bool a = true;
             if (!nc) { print("Buffer " + name); }
@@ -51,8 +55,11 @@ public class Buffer
             while (que.Count != 0)
             {
                 string inp = que[0];
-                pr_cl(" execute> ", end: "");
-                pr_cl(inp, fg: ConsoleColor.Green, bg: ConsoleColor.Black);
+                if (Settings.settings["comand_print"] == "normal")
+                {
+                    pr_cl(" execute> ", end: "");
+                    pr_cl(inp, fg: ConsoleColor.Green, bg: ConsoleColor.Black);
+                }
                 if (inp == "end") { return; }
 
                 if (inp == "tfs")
